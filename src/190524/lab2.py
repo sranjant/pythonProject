@@ -1,0 +1,53 @@
+import time
+import pytest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
+
+
+@pytest.mark.smoke
+def test_open_bookerlogin():
+    driver = webdriver.Chrome()
+    driver.get('https://automationintesting.online/#/admin')
+    time.sleep(5)
+    user_name = driver.find_element(By.ID, "username")
+    user_name.send_keys("admin")
+    password= driver.find_element(By.ID, "password")
+    password.send_keys("password")
+    time.sleep(2)
+    login=driver.find_element(By.ID, "doLogin").click()
+    time.sleep(10)
+    room = driver.find_element(By.ID, "roomName")
+    room.send_keys("102")
+    Type = driver.find_element(By.ID, "type")
+    dropdown=Select(Type)
+    dropdown.select_by_value("Double")
+    time.sleep(2)
+    Access = driver.find_element(By.ID, "accessible")
+    dropdown = Select(Access)
+    dropdown.select_by_value("false")
+    time.sleep(2)
+    Price=driver.find_element(By.ID, "roomPrice").send_keys("200")
+    time.sleep(2)
+    driver.find_element(By.ID, "wifiCheckbox").click()
+    time.sleep(2)
+    driver.find_element(By.ID, "refreshCheckbox").click()
+    time.sleep(2)
+    crroom=login= driver.find_element(By.ID, "createRoom").click()
+    time.sleep(5)
+    room = driver.find_element(By.ID, "roomName")
+    room.send_keys("202")
+    Type = driver.find_element(By.ID, "type")
+    dropdown = Select(Type)
+    dropdown.select_by_value("Double")
+    time.sleep(3)
+    Access = driver.find_element(By.ID, "accessible")
+    dropdown = Select(Access)
+    dropdown.select_by_value("true")
+    time.sleep(3)
+    Price = driver.find_element(By.ID, "roomPrice").send_keys("200")
+    time.sleep(3)
+    driver.find_element(By.ID, "radioCheckbox").click()
+    time.sleep(2)
+    crroom = login = driver.find_element(By.ID, "createRoom").click()
+    time.sleep(5)
